@@ -18,10 +18,6 @@ import (
 	"github.com/google/uuid"
 )
 
-const (
-	trackingErrorCountMetrics string = "error_count_metrics"
-)
-
 func (r *rest) BodyLogger(ctx *gin.Context) {
 	if r.conf.LogRequest {
 		r.log.Info(ctx.Request.Context(),
@@ -77,7 +73,7 @@ func (r *rest) httpRespError(ctx *gin.Context, err error) {
 	c := ctx.Request.Context()
 
 	if errors.Is(c.Err(), context.DeadlineExceeded) {
-		err = errors.NewWithCode(codes.CodeContextDeadlineExceeded, "Context Deadline Exceeded")
+		err = errors.NewWithCode(codes.CodeContextDeadlineExceeded, "%s", "Context Deadline Exceeded")
 	}
 
 	httpStatus, displayError := errors.Compile(err, appcontext.GetAcceptLanguage(ctx))
@@ -142,7 +138,7 @@ func (r *rest) httpRespSuccess(ctx *gin.Context, code codes.Code, data interface
 
 	raw, err := r.json.Marshal(&resp)
 	if err != nil {
-		r.httpRespError(ctx, errors.NewWithCode(codes.CodeInternalServerError, err.Error()))
+		r.httpRespError(ctx, errors.NewWithCode(codes.CodeInternalServerError, "%s", err.Error()))
 		return
 	}
 
@@ -158,7 +154,7 @@ func (r *rest) httpRespSuccess(ctx *gin.Context, code codes.Code, data interface
 func (r *rest) Bind(ctx *gin.Context, obj interface{}) error {
 	err := ctx.ShouldBindWith(obj, binding.Default(ctx.Request.Method, ctx.ContentType()))
 	if err != nil {
-		return errors.NewWithCode(codes.CodeBadRequest, err.Error())
+		return errors.NewWithCode(codes.CodeBadRequest, "%s", err.Error())
 	}
 
 	return nil
@@ -168,7 +164,7 @@ func (r *rest) Bind(ctx *gin.Context, obj interface{}) error {
 func (r *rest) BindQuery(ctx *gin.Context, obj interface{}) error {
 	err := ctx.ShouldBindWith(obj, binding.Query)
 	if err != nil {
-		return errors.NewWithCode(codes.CodeBadRequest, err.Error())
+		return errors.NewWithCode(codes.CodeBadRequest, "%s", err.Error())
 	}
 
 	return nil
@@ -178,7 +174,7 @@ func (r *rest) BindQuery(ctx *gin.Context, obj interface{}) error {
 func (r *rest) BindUri(ctx *gin.Context, obj interface{}) error {
 	err := ctx.ShouldBindUri(obj)
 	if err != nil {
-		return errors.NewWithCode(codes.CodeBadRequest, err.Error())
+		return errors.NewWithCode(codes.CodeBadRequest, "%s", err.Error())
 	}
 
 	return nil
@@ -188,12 +184,12 @@ func (r *rest) BindUri(ctx *gin.Context, obj interface{}) error {
 func (r *rest) BindParams(ctx *gin.Context, obj interface{}) error {
 	err := r.BindQuery(ctx, obj)
 	if err != nil {
-		return errors.NewWithCode(codes.CodeBadRequest, err.Error())
+		return errors.NewWithCode(codes.CodeBadRequest, "%s", err.Error())
 	}
 
 	err = r.BindUri(ctx, obj)
 	if err != nil {
-		return errors.NewWithCode(codes.CodeBadRequest, err.Error())
+		return errors.NewWithCode(codes.CodeBadRequest, "%s", err.Error())
 	}
 
 	return nil
