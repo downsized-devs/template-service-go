@@ -1,0 +1,107 @@
+{
+    "Meta": {
+        "Title": "",
+        "Description": "",
+        "Host": "",
+        "Basepath": "/",
+        "Version": ""
+    },
+    "Gin": {
+        "Host": "",
+        "Port": "",
+        "Mode": "",
+        "Timeout": "60s",
+        "ShutdownTimeout": "10s",
+        "LogRequest": "true",
+        "LogResponse": "true",
+        "CORS": {
+            "Mode": "allowall"
+        },
+        "Meta": "$ref:#/Meta",
+        "Swagger": {
+            "Basicauth": {
+                "Password": "",
+                "Username": ""
+            },
+            "Enabled": "",
+            "Path": ""
+        },
+        "Platform": {
+            "BasicAuth": {
+                "Password": "",
+                "Username": ""
+            },
+            "Enabled": "",
+            "Path": ""
+        },
+        "Dummy": {
+            "Enabled": "",
+            "Path": ""
+        },
+        "Profiler": {
+            "Pprof": {
+                "Enabled": "",
+                "PathPrefix": "",
+                "BasicAuth": {
+                    "UserName": "",
+                    "Password": ""
+                }
+            }
+        }
+    },
+    "Log": {
+        "Level": ""
+    },
+    "Business": {},
+    "SQL": {
+        "UseInstrument": "",
+        "LogQuery": "",
+        "Driver": "",
+        "Follower": {
+            "Host": "",
+            "Port": "",
+            "DB": "",
+            "User": "",
+            "Password": "",
+            "SSL": null,
+            "Schema": null,
+            "Options": {
+                "MaxLifeTime": "",
+                "MaxIdle": "",
+                "MaxOpen": ""
+             }
+        },
+        "Leader": {
+            "Host": "",
+            "Port": "",
+            "DB": "",
+            "User": "",
+            "Password": "",
+            "SSL": null,
+            "Schema": null,
+            "Options": {
+                "MaxLifeTime": "",
+                "MaxIdle": "",
+                "MaxOpen": ""
+             }
+        }
+    },
+    "Parser": {
+        "JSONOptions": {
+            "Config": "default",
+            "IndentionStep": "0",
+            "MarshalFloatWith6Digits": false,
+            "EscapeHTML": true,
+            "SortMapKeys": false,
+            "UseNumber": true,
+            "DisallowUnknownFields": false,
+            "TagKey": "json",
+            "OnlyTaggedField": true,
+            "ValidateJSONRawMessage": true,
+            "ObjectFieldMustBeSimpleString": false,
+            "CasesenSitive": true,
+            "Schema": {}
+        }
+    },
+    "Scheduler": {}
+}
