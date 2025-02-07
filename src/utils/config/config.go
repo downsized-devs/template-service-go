@@ -10,19 +10,10 @@ import (
 
 type Application struct {
 	Log       logger.Config
-	Meta      ApplicationMeta
 	Gin       GinConfig
 	SQL       sql.Config
 	Parser    parser.Options
 	Scheduler SchedulerConfig
-}
-
-type ApplicationMeta struct {
-	Title       string
-	Description string
-	Host        string
-	BasePath    string
-	Version     string
 }
 
 type GinConfig struct {
@@ -33,9 +24,17 @@ type GinConfig struct {
 	Timeout         time.Duration
 	ShutdownTimeout time.Duration
 	CORS            CORSConfig
-	Meta            ApplicationMeta
+	Meta            GinMeta
 	Swagger         SwaggerConfig
 	Platform        PlatformConfig
+}
+
+type GinMeta struct {
+	Title       string
+	Description string
+	Host        string
+	BasePath    string
+	Version     string
 }
 
 type CORSConfig struct {
